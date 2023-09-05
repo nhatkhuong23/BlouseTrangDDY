@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Blouse Trang</title>
+  <link rel="stylesheet" href="index.css" type="text/css">
+  <style>
+    a {
+      color: white;
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: white;
+      text-decoration: none;
+    }
+  </style>
+</head>
+
+<body>
+  <audio autoplay id="typing">
+    <source src="images/typing.mp3" type="audio/mpeg">
+    <source src="images/typing.wav" type="audio/wav">
+    <source src="images/typing.ogg" type="audio/ogg">
+  </audio>
+
+  <audio autoplay id="stopTyping">
+    <source src="images/stopTyping.mp3" type="audio/mpeg">
+    <source src="images/stopTyping.wav" type="audio/wav">
+    <source src="images/stopTyping.ogg" type="audio/ogg">
+  </audio>
+
+  <audio autoplay id="ting">
+    <source src="images/ting.mp3" type="audio/mpeg">
+    <source src="images/ting.wav" type="audio/wav">
+    <source src="images/ting.ogg" type="audio/ogg">
+  </audio>
+
+  <a href="style.html">
+    <p id="line"></p>
+  </a>
+  <div class="cursor"></div>
+  </div>
+  <script>
+    setTimeout(myFunction, 51500)
+
+    function myFunction() {
+      window.location.href = 'style.html'
+    }
+    var line = document.getElementById("line")
+    var txts = ['CLB Blouse Trắng',
+      'Được thành lập vào ngày 22/05/2015',
+      'Với slogan: "Blouse Trắng - Gắn kết yêu thương"',
+      'Bao gồm các ban:...',
+      'Ban Tổ chức - Sự kiện',
+      'Ban Truyền thông',
+      'Ban Văn nghệ',
+      'Ban Hậu cần',
+      'Ban Nhân sự',
+      'Cùng tụi mình khám phá các hoạt động của clb nhé!',
+      'Love 💖'
+    ];
+    var speed = 150
+
+    async function typewriter(txt) {
+      var x = document.getElementById("typing");
+      var y = document.getElementById("ting");
+      x.volume = 0.8;
+      y.volume = 0.8;
+
+      for (let i = 0; i < txt.length; ++i) {
+        x.play();
+        line.innerHTML += txt.charAt(i);
+        await delay(30)
+      }
+      x.pause();
+      y.play();
+    }
+
+    async function reverseTypewriter(txt) {
+      for (let i = txt.length; i > 0; i--) {
+        var audio = document.getElementById("stopTyping");
+        audio.volume = 0.8;
+        audio.play();
+
+        line.innerHTML = line.innerHTML.slice(0, -1)
+        await delay(30)
+      }
+    }
+
+    async function writeLoop() {
+
+      for (let i = 0; i < txts.length; i++) {
+        await typewriter(txts[i])
+        await delay(2000)
+        await reverseTypewriter(txts[i])
+        await delay(1000)
+      }
+
+      writeLoop()
+    }
+
+    function delay(ms) {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve()
+        }, ms)
+      })
+    }
+
+    writeLoop()
+  </script>
+</body>
+
+</html>
